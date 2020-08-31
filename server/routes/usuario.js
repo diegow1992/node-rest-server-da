@@ -10,7 +10,16 @@ const _ = require('underscore');
 const Usuario = require('../models/usuario-model');
 
 
-app.get('/usuario', (req, res) => {
+const { verificarToken, verificarAdmin_Rol } = require('../middlewares/autenticacion');
+
+
+app.get('/usuario', verificarToken, (req, res) => {
+
+    /*return res.json({
+        usuario: req.usuario,
+        nombre: req.usuario.nombre,
+        email: req.usuario.email
+    });*/
 
     let desde = req.query.desde || 0;
     desde = Number(desde);
@@ -40,7 +49,8 @@ app.get('/usuario', (req, res) => {
     });
 });
 
-app.post('/usuario', (req, res) => {
+
+app.post('/usuario', [verificarToken, verificarAdmin_Rol], (req, res) => {
 
     let body = req.body;
 
@@ -69,7 +79,7 @@ app.post('/usuario', (req, res) => {
 });
 
 //......./:id es el parámetro que recibirá el URL para actualizar o modificar los datos de algun usuario
-app.put('/usuario/:id', (req, res) => {
+app.put('/usuario/:id', [verificarToken, verificarAdmin_Rol], (req, res) => {
 
     let id = req.params.id;
 
@@ -94,7 +104,7 @@ app.put('/usuario/:id', (req, res) => {
     });
 });
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/usuario/:id', [verificarToken, verificarAdmin_Rol], (req, res) => {
 
     let id = req.params.id;
 
