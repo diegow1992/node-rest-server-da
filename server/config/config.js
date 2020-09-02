@@ -17,7 +17,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 // 60 minutos
 // 24 horas
 // 30 días
-process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30; //Duracion de un mes
+process.env.CADUCIDAD_TOKEN = '30d'; //Duracion de un mes
 
 
 
@@ -40,3 +40,8 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URLDB = urlDB;
+
+//=========================================
+//             Google ID client
+//=========================================
+//process.env.CLIENT_ID = process.env.CLIENT_ID || '620056254796-tg1pkshvsh183r7lletsf2sd3uvtcsqd.apps.googleusercontent.com';
